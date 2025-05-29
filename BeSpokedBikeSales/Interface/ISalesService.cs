@@ -10,5 +10,6 @@ namespace BeSpokedBikeSales.Interface
         public Sale CreateSale(Sale sale);
         public Sale UpdateSale(Sale sale);
         public Sale DeleteSale(int id);
+        public List<Sale> GetFilteredListOfSales(DateTime startDate, DateTime endDate);
     }
 }

@@ -9,6 +9,18 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+@using (Html.BeginForm("Index", "Sales", FormMethod.Get))
+{
+    <label>Start Date:</label>
+    <input type="date" name="startDate" value="@ViewData["StartDate"]" />
+
+    <label>End Date:</label>
+    <input type="date" name="endDate" value="@ViewData["EndDate"]" />
+
+    <input type="submit" value="Filter" />
+}
+
 <table class="table">
     <thead>
         <tr>

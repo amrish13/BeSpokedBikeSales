@@ -79,6 +79,24 @@ namespace BeSpokedBikeSales.Services
             }
         }
 
+        public List<Sale> GetFilteredListOfSales(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var sales = _context.Sale
+                    .Include(c => c.Customer)
+                    .Include(p => p.Product)
+                    .Include(s => s.SalesPerson)
+                    .Where(s => s.SalesDate >= startDate && s.SalesDate <= endDate)
+                    .ToList();
+                return sales;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public Sale? GetSaleById(int id)
         {
             try

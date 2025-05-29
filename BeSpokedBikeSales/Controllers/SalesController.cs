@@ -29,10 +29,24 @@ namespace BeSpokedBikeSales.Controllers
             _customerService = customerService;
         }
 
-        // GET: Sales
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(DateOnly? startDate, DateOnly? endDate)
         {
-            return View(_service.GetListOfSales());
+            List<Sale> sales;
+            if (startDate.HasValue && endDate.HasValue)
+            {
+                sales = _service.GetFilteredListOfSales(
+                    startDate.Value.ToDateTime(TimeOnly.MinValue),
+                    endDate.Value.ToDateTime(TimeOnly.MinValue)
+                );
+            }
+            else
+            {
+                sales = _service.GetListOfSales();
+            }
+
+            ViewData["StartDate"] = startDate?.ToString("yyyy-MM-dd");
+            ViewData["EndDate"] = endDate?.ToString("yyyy-MM-dd");
+            return View(sales);
         }
 
         // GET: Sales/Details/5
