@@ -1,0 +1,52 @@
+﻿@model BeSpokedBikeSales.Models.Sale
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Sale</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SaleId" />
+            <div class="form-group">
+                <label asp-for="SalesDate" class="control-label"></label>
+                <input asp-for="SalesDate" class="form-control" />
+                <span asp-validation-for="SalesDate" class="text-danger"></span>
+
+                <label asp-for="ProductId" class="control-label"></label>
+                <select asp-for="ProductId" asp-items="ViewBag.ProductsList" class="form-control">
+                    <option value="">Select a product</option>
+                </select>
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+
+                <label asp-for="SalesPersonId" class="control-label"></label>
+                <select asp-for="SalesPersonId" asp-items="ViewBag.SalesPeopleList" class="form-control">
+                    <option value="">Select a Sales Person</option>
+                </select>
+                <span asp-validation-for="SalesPersonId" class="text-danger"></span>
+
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" asp-items="ViewBag.CustomersList" class="form-control">
+                    <option value="">Select a product</option>
+                </select>
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
