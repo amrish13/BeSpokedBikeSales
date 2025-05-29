@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<BeSpokedBikeSalesContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BeSpokedBikeSalesContext") ?? throw new InvalidOperationException("Connection string 'BeSpokedBikeSalesContext' not found.")));
+    options.UseMySql(builder.Configuration.GetConnectionString("BeSpokedBikeSalesContext") ?? throw new InvalidOperationException("Connection string 'BeSpokedBikeSalesContext' not found."), 
+    ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("BeSpokedBikeSalesContext"))));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
